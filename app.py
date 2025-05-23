@@ -1,14 +1,19 @@
-from flask import Flask, request, render_template
+from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Habilita CORS para todas las rutas
 
-@app.route('/', methods=['GET', 'POST'])
-def saludar_nombre():
-    nombre_ingresado = None
-    if request.method == 'POST':
-        nombre_ingresado = request.form['nombre']
-    return render_template('saludo.html', nombre=nombre_ingresado)
+@app.route('/saludar', methods=['GET'])
+def saludar():
+    """
+    Endpoint que devuelve un mensaje de 'Hola, mundo'.
+    """
+    print("Recibida solicitud en /saludar") # Mensaje para la consola del backend
+    return jsonify({"mensaje": "¡Hola, mundo desde el backend!"})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    # Ejecuta la aplicación en el puerto 5000 (puerto por defecto de Flask)
+    # debug=True permite que el servidor se recargue automáticamente con cambios
+    app.run(debug=True, port=5000)
     
