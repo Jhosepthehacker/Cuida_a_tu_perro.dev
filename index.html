@@ -3,96 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend con Backend</title>
-    <style>
-        /* Estilos CSS */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            flex-direction: column;
-        }
-
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        button {
-            padding: 12px 25px;
-            font-size: 1.1em;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        #mensajeDelBackend {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Interactuando con el Backend</h1>
-        <button id="btnSaludar">Obtener Saludo del Backend</button>
-        <p id="mensajeDelBackend"></p>
-    </div>
-
-    <script>
-        // JavaScript
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnSaludar = document.getElementById('btnSaludar');
-            const mensajeDelBackend = document.getElementById('mensajeDelBackend');
-
-            btnSaludar.addEventListener('click', async () => {
-                mensajeDelBackend.textContent = 'Cargando...'; // Mensaje de carga
-                mensajeDelBackend.classList.remove('error'); // Limpiar estilo de error
-
-                try {
-                    // Realizar una solicitud GET a tu API de Flask
-                    // Asegúrate de que la URL y el puerto coincidan con tu backend
-                    const response = await fetch('http://127.0.0.1:5000/saludar');
-
-                    // Verificar si la respuesta fue exitosa (código 200 OK)
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status}`);
-                    }
-
-                    // Parsear la respuesta JSON
-                    const data = await response.json();
-
-                    // Mostrar el mensaje recibido del backend
-                    mensajeDelBackend.textContent = data.mensaje;
-
-                } catch (error) {
-                    console.error('Hubo un error al obtener el mensaje:', error);
-                    mensajeDelBackend.textContent = 'Error al conectar con el servidor.';
-                    mensajeDelBackend.classList.add('error'); // Añadir estilo de error
-                }
-            });
-        });
-    </script>
+    <h1>Lista de Usuarios</h1>
+    <ul id="user-list"></ul>
+    <script src="script.js"></script>
 </body>
 </html>
